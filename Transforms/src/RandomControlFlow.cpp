@@ -100,6 +100,7 @@ void RandomControlFlow::insertRandomBranch(Value *randVar, BasicBlock *ifTrue, B
     // 对随机数进行等价变换，随机数变为复杂的算术表达式
     Value *alteredRandVar = alterVal(randVar, insertAfter);
     // 随机数模2，取余数，比如0xff and 0x01 => 0x01, 0xfe and 0x01 => 0x00
+    // Value *randMod2 = BinaryOperator::CreateURem(alteredRandVar, CONST_I32(2), "", insertAfter);
     Value *randMod2 = BinaryOperator::Create(Instruction::And, alteredRandVar, CONST_I32(1), "", insertAfter);
     // 生成条件比较指令
     ICmpInst *condition = new ICmpInst(*insertAfter, ICmpInst::ICMP_EQ, randMod2, CONST_I32(1));
