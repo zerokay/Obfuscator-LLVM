@@ -137,6 +137,7 @@ void Flattening::flatten(Function &F){
             // Flattening Pass 之前调用 LowerSwitch Pass，将switch => branch
             // 因此这里就不需要考虑switch指令
             BranchInst *br = cast<BranchInst>(BB->getTerminator());
+            // 根据条件设置swVarPtr的值
             SelectInst *sel = SelectInst::Create(br->getCondition(), numCaseTrue, numCaseFalse, "", BB->getTerminator());
             BB->getTerminator()->eraseFromParent();
             new StoreInst(sel, swVarPtr, BB);
