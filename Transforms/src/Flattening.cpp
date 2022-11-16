@@ -54,6 +54,7 @@ void Flattening::flatten(Function &F){
     if(F.size() <= 1){
         return;
     }
+
     // 第一步：保存除入口块以外的基本块
     // 将除入口块（第一个基本块）以外的基本块保存到一个 vector 容器中，便于后续处理
     // 首先保存所有基本块
